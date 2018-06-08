@@ -42,3 +42,8 @@ class CriteriaCollectionTest extends \Codeception\Test\Unit
         $this->assertCount(0, $this->criteriaCollection->getAll());
     }
 }
+$this->criteriaCollection
+    ->reset()
+    ->add(new WithRelationCriterion('contentGroups'))
+    ->add(new WithRelatedUserCriterion($request->user()))
+    ->add(new WithSearchQueryCriterion('foobar', 'name'));

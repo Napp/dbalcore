@@ -43,7 +43,8 @@
   "extra": {
     "laravel": {
       "providers": [
-        "Napp\\Core\\Dbal\\Criteria\\CriteriaServiceProvider"
+        "Napp\\Core\\Dbal\\Criteria\\CriteriaServiceProvider",
+        "Napp\\Core\\Dbal\\Builder\\BuilderServiceProvider"
       ],
       "aliases": {}
     }
