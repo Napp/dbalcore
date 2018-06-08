@@ -16,8 +16,7 @@ class ReplaceIntoBuilder
      */
     public function replace()
     {
-        $self = $this;
-        return function (array $values) use ($self) {
+        return function (array $values)  {
 
             /** @var Builder $this  */
 
@@ -52,7 +51,7 @@ class ReplaceIntoBuilder
                 }
             }
 
-            $sql = $self->compileReplace($this, $this->getGrammar(), $values);
+            $sql = $this->compileReplace($values);
 
             // Once we have compiled the insert statement's SQL we can execute it on the
             // connection and return a result as a boolean success indicator as that
@@ -70,30 +69,34 @@ class ReplaceIntoBuilder
      * @param array $values
      * @return string
      */
-    public function compileReplace(Builder $query, Grammar $grammar, array $values)
+    public static function compileReplace()
     {
-        // Essentially we will force every insert to be treated as a batch insert which
-        // simply makes creating the SQL easier for us since we can utilize the same
-        // basic routine regardless of an amount of records given to us to insert.
-        $table = $grammar->wrapTable($query->from);
+        return function (array $values) {
 
-        if (! \is_array(reset($values))) {
-            $values = [$values];
-        }
+            $grammar = $this->getGrammar();
+            // Essentially we will force every insert to be treated as a batch insert which
+            // simply makes creating the SQL easier for us since we can utilize the same
+            // basic routine regardless of an amount of records given to us to insert.
+            $table = $grammar->wrapTable($this->from);
 
-        $columns = $grammar->columnize(array_keys(reset($values)));
+            if (! \is_array(reset($values))) {
+                $values = [$values];
+            }
 
-        // We need to build a list of parameter place-holders of values that are bound
-        // to the query. Each insert should have the exact same amount of parameter
-        // bindings so we will loop through the record and parameterize them all.
-        $parameters = [];
+            $columns = $grammar->columnize(array_keys(reset($values)));
 
-        foreach ($values as $record) {
-            $parameters[] = '('.$grammar->parameterize($record).')';
-        }
+            // We need to build a list of parameter place-holders of values that are bound
+            // to the query. Each insert should have the exact same amount of parameter
+            // bindings so we will loop through the record and parameterize them all.
+            $parameters = [];
 
-        $parameters = implode(', ', $parameters);
+            foreach ($values as $record) {
+                $parameters[] = '('.$grammar->parameterize($record).')';
+            }
 
-        return "replace into {$table} ({$columns}) values {$parameters}";
+            $parameters = implode(', ', $parameters);
+
+            return "replace into {$table} ({$columns}) values {$parameters}";
+        };
     }
 }

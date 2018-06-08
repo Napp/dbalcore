@@ -13,6 +13,7 @@ class BuilderServiceProvider extends ServiceProvider
     public function boot()
     {
         Builder::mixin(new ReplaceIntoBuilder);
-        //Builder::mixin(new InsertOnDuplicateKeyBuilder);
+        $builder = new InsertOnDuplicateKeyBuilder();
+        $builder();
     }
 }

@@ -1,11 +1,12 @@
 <?php
 
-namespace Napp\Core\Dbal\Tests\unit;
+namespace Napp\Core\Dbal\Tests\Unit;
 
 use Napp\Core\Dbal\Criteria\CriterionInterface;
 use Napp\Core\Dbal\Criteria\GroupByCriterion;
+use Napp\Core\Dbal\Tests\TestCase;
 
-class GroupByCriterionTest extends \Codeception\Test\Unit
+class GroupByCriterionTest extends TestCase
 {
     protected $criterion;
 

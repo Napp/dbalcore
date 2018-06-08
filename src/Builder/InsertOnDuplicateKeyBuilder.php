@@ -19,6 +19,7 @@ class InsertOnDuplicateKeyBuilder
         Builder::macro('insertIgnore', function (array $values) {
             return $this->insertOnDuplicateKey($values, null, 'ignore');
         });
+
         /**
          * Run an insert on duplicate key update statement against the database.
          *
@@ -38,9 +39,11 @@ class InsertOnDuplicateKeyBuilder
             if (empty($values)) {
                 return true;
             }
-            if (!is_array(reset($values))) {
+
+            if (! \is_array(reset($values))) {
                 $values = [$values];
             }
+
             // Here, we will sort the insert keys for every record so that each insert is
             // in the same order for the record. We need to make sure this is the case
             // so there are not any errors or problems when inserting these records.
@@ -58,23 +61,31 @@ class InsertOnDuplicateKeyBuilder
             // simply makes creating the SQL easier for us since we can utilize the same
             // basic routine regardless of an amount of records given to us to insert.
             $table = $this->grammar->wrapTable($this->from);
+
             $columns = array_keys(reset($values));
+
             $columnsString = $this->grammar->columnize($columns);
+
             // We need to build a list of parameter place-holders of values that are bound
             // to the query. Each insert should have the exact same amount of parameter
             // bindings so we will loop through the record and parameterize them all.
             $parameters = collect($values)->map(function ($record) {
                 return '(' . $this->grammar->parameterize($record) . ')';
             })->implode(', ');
+
             $sql = 'insert ' . ($type === 'ignore' ? 'ignore ' : '') . "into $table ($columnsString) values $parameters";
+
             if ($type === 'ignore') {
                 return $this->connection->insert($sql, $bindings);
             }
+
             $sql .= ' on duplicate key update ';
+
             // We will update all the columns specified in $values by default.
             if ($columnsToUpdate === null) {
                 $columnsToUpdate = $columns;
             }
+
             foreach ($columnsToUpdate as $key => $value) {
                 $column = is_int($key) ? $value : $key;
                 $column = $this->grammar->wrap($column);
@@ -91,6 +102,7 @@ class InsertOnDuplicateKeyBuilder
                 }
                 $sql .= ',';
             }
+
             return $this->connection->insert(rtrim($sql, ','), $bindings);
         });
 
@@ -121,6 +133,7 @@ class InsertOnDuplicateKeyBuilder
             $this->newPivotStatement()->insertOnDuplicateKey($this->formatAttachRecords(
                 $this->parseIds($id), $attributes
             ));
+
             if ($touch) {
                 $this->touchIfTouching();
             }
