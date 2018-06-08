@@ -1,17 +1,22 @@
 <?php
 
+namespace Napp\Core\Dbal\Tests\Unit;
+
 use Napp\Core\Dbal\Criteria\CriterionInterface;
 use Napp\Core\Dbal\Criteria\SelectCriterion;
+use Napp\Core\Dbal\Tests\TestCase;
 
-class SelectCriterionTest extends \Codeception\Test\Unit
+class SelectCriterionTest extends TestCase
 {
     /**
      * @var SelectCriterion
      */
     protected $criterion;
 
-    public function _before()
+    public function setUp()
     {
+        parent::setUp();
+
         $this->criterion = new SelectCriterion(['id', 'file']);
     }
 

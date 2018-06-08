@@ -1,18 +1,23 @@
 <?php
 
-use Napp\Core\Dbal\Criteria\CriterionInterface;
-use Napp\Core\Dbal\Criteria\OrderByCriterion;
+namespace Napp\Core\Dbal\Tests\Unit;
 
-class OrderByCriterionTest extends \Codeception\Test\Unit
+use Napp\Core\Dbal\Criteria\CriterionInterface;
+use Napp\Core\Dbal\Criteria\OffsetLimitCriterion;
+use Napp\Core\Dbal\Tests\TestCase;
+
+class OffsetLimitCriterionTest extends TestCase
 {
     /**
-     * @var OrderByCriterion
+     * @var OffsetLimitCriterion
      */
     protected $criterion;
 
-    public function _before()
+    public function setUp()
     {
-        $this->criterion = new OrderByCriterion('published', 'desc');
+        parent::setUp();
+
+        $this->criterion = new OffsetLimitCriterion(0, 30);
     }
 
     public function test_it_implements_interface()
@@ -26,14 +31,19 @@ class OrderByCriterionTest extends \Codeception\Test\Unit
             ->disableOriginalConstructor()
             ->getMock();
         $query->expects($this->once())
-            ->method('orderBy')
+            ->method('skip')
+            ->with(0)
+            ->willReturn($query);
+        $query->expects($this->once())
+            ->method('take')
+            ->with(30)
             ->willReturn($query);
 
         $builder = $this->getMockBuilder(\Illuminate\Database\Eloquent\Builder::class)
             ->disableOriginalConstructor()
             ->setMethods(['getQuery'])
             ->getMock();
-        $builder->expects($this->once())
+        $builder->expects($this->exactly(2))
             ->method('getQuery')
             ->willReturn($query);
 

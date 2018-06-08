@@ -1,6 +1,6 @@
 <?php
 
-namespace Stubs;
+namespace Napp\Core\Dbal\Tests\Stubs;
 
 use Napp\Core\Dbal\Criteria\CriterionInterface;
 

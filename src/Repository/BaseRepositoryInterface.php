@@ -68,4 +68,13 @@ interface BaseRepositoryInterface
      * @return Collection
      */
     public function getAllMatchingCriteria(CriteriaCollectionInterface $criteriaCollection): Collection;
+
+    /**
+     * @param callable $callback
+     * @param int $attempts
+     * @return mixed
+     * @throws \Throwable
+     */
+    public function transaction(callable $callback, $attempts = 1);
+
 }

@@ -1,24 +1,36 @@
 <?php
 
+namespace Napp\Core\Dbal\Tests\Unit;
+
 use Napp\Core\Dbal\Criteria\CriteriaCollection;
 use Napp\Core\Dbal\Criteria\CriteriaCollectionInterface;
-use \Stubs\CriterionStub;
+use Napp\Core\Dbal\Tests\Stubs\CriterionStub;
+use Napp\Core\Dbal\Tests\TestCase;
 
-class CriteriaCollectionTest extends \Codeception\Test\Unit
+class CriteriaCollectionTest extends TestCase
 {
     /**
      * @var CriteriaCollectionInterface
      */
     protected $criteriaCollection;
 
-    public function _before()
+    public function setUp()
     {
+        parent::setUp();
+
         $this->criteriaCollection = new CriteriaCollection();
     }
 
     public function test_it_implements_interface()
     {
         $this->assertInstanceOf(CriteriaCollectionInterface::class, $this->criteriaCollection);
+    }
+    
+    public function test_it_can_be_retrieved_from_the_container()
+    {
+        $instance = $this->app->make(CriteriaCollectionInterface::class);
+        
+        $this->assertInstanceOf(CriteriaCollection::class, $instance);
     }
 
     public function test_it_adds_criterion()
