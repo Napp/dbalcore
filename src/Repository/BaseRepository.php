@@ -127,4 +127,16 @@ abstract class BaseRepository
 
         return $query->get();
     }
+
+    /**
+     * @param callable $callback
+     * @param int $attempts
+     * @return mixed
+     * @throws \Throwable
+     */
+    public function transaction(callable $callback, $attempts = 1)
+    {
+        return $this->query->newQuery()->getConnection()->transaction($callback, $attempts);
+    }
+
 }
