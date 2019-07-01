@@ -14,7 +14,7 @@ class CriteriaCollectionTest extends TestCase
      */
     protected $criteriaCollection;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 

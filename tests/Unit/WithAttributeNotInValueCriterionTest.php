@@ -13,7 +13,7 @@ class WithAttributeNotInValueCriterionTest extends TestCase
      */
     protected $criterion;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 

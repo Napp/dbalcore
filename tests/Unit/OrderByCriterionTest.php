@@ -10,7 +10,7 @@ class OrderByCriterionTest extends \Napp\Core\Dbal\Tests\TestCase
      */
     protected $criterion;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
