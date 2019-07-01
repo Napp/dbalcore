@@ -16,8 +16,6 @@ cache:
     - $HOME/.composer/cache
 
 before_script:
-  - sudo mysql_upgrade
-  - sudo service mysql restart
   - mysql -e 'CREATE DATABASE IF NOT EXISTS dbalcore_testing;'
   - composer install --no-interaction
   - composer dump-autoload
