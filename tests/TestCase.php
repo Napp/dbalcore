@@ -16,7 +16,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
     /**
      * Set up the test
      */
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -65,8 +65,8 @@ class TestCase extends \Orchestra\Testbench\TestCase
             'host' => env('DB_HOST', '127.0.0.1'),
             'port' => env('DB_PORT', '3306'),
             'database' => env('DB_DATABASE', 'dbalcore_testing'),
-            'username' => env('DB_USERNAME', 'root'),
-            'password' => env('DB_PASSWORD', ''),
+            'username' => env('DB_USERNAME', 'username'),
+            'password' => env('DB_PASSWORD', 'password'),
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
