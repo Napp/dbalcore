@@ -1,36 +1,28 @@
 language: php
 
+services:
+  - docker
+
 php:
   - 7.1
   - 7.2
+  - 7.3
 
-sudo: true
+sudo: false
 
-env:
-  global:
-    - DB_PASSWORD=''
-    - DB_USERNAME=root
-
-cache:
-  directories:
-    - $HOME/.composer/cache
+install:
+  - travis_retry composer install
 
 before_script:
-  - mysql -e 'CREATE DATABASE IF NOT EXISTS dbalcore_testing;'
-  - composer install --no-interaction
-  - composer dump-autoload
+  - travis_retry composer self-update
+  - travis_retry composer update --no-interaction --prefer-dist
+  - sudo service mysql stop
+  - docker-compose -f ./tests/docker-compose.yml up -d
+  - php tests/wait.php
 
 script:
   - vendor/bin/phpunit --coverage-clover=coverage.xml
-after_success:
-  - bash <(curl -s https://codecov.io/bash)
-services:
-  - mysql
 
-addons:
-  apt:
-    sources:
-      - mysql-5.7-trusty
-    packages:
-      - mysql-server
-      - mysql-client
+after_script:
+  - bash <(curl -s https://codecov.io/bash)
+  - docker-compose -f ./tests/docker-compose.yml down
