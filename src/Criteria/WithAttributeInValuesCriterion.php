@@ -16,7 +16,7 @@ class WithAttributeInValuesCriterion implements CriterionInterface
 
     /**
      * @param string $attribute
-     * @param array $values
+     * @param array  $values
      */
     public function __construct($attribute, $values)
     {
@@ -26,11 +26,12 @@ class WithAttributeInValuesCriterion implements CriterionInterface
 
     /**
      * @param \Illuminate\Database\Eloquent\Builder $query
+     *
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function apply($query)
     {
-        $query->getQuery()->whereIn($query->getModel()->getTable() . '.' . $this->attribute, $this->values);
+        $query->getQuery()->whereIn($query->getModel()->getTable().'.'.$this->attribute, $this->values);
 
         return $query;
     }

@@ -12,7 +12,8 @@ class WithSearchQueryCriterion implements CriterionInterface
 
     /**
      * WithSearchQueryCriterion constructor.
-     * @param string $searchQuery
+     *
+     * @param string      $searchQuery
      * @param string|null $field
      */
     public function __construct(string $searchQuery, string $field = null)
@@ -23,6 +24,7 @@ class WithSearchQueryCriterion implements CriterionInterface
 
     /**
      * @param \Illuminate\Database\Eloquent\Builder $query
+     *
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function apply($query)
@@ -31,7 +33,7 @@ class WithSearchQueryCriterion implements CriterionInterface
             return $query;
         }
 
-        $query->getQuery()->where($this->field, 'LIKE', '%' . $this->searchQuery . '%');
+        $query->getQuery()->where($this->field, 'LIKE', '%'.$this->searchQuery.'%');
 
         return $query;
     }

@@ -11,6 +11,7 @@ class CriteriaCollection implements CriteriaCollectionInterface
 
     /**
      * @param CriterionInterface $criterion
+     *
      * @return $this
      */
     public function add(CriterionInterface $criterion)

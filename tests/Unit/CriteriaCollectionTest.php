@@ -25,11 +25,11 @@ class CriteriaCollectionTest extends TestCase
     {
         $this->assertInstanceOf(CriteriaCollectionInterface::class, $this->criteriaCollection);
     }
-    
+
     public function test_it_can_be_retrieved_from_the_container()
     {
         $instance = $this->app->make(CriteriaCollectionInterface::class);
-        
+
         $this->assertInstanceOf(CriteriaCollection::class, $instance);
     }
 

@@ -4,8 +4,8 @@ namespace Napp\Core\Dbal\Tests\Unit;
 
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
-use Napp\Core\Dbal\Tests\Stubs\User;
 use Napp\Core\Dbal\Tests\Stubs\Role;
+use Napp\Core\Dbal\Tests\Stubs\User;
 use Napp\Core\Dbal\Tests\TestCase;
 
 class InsertOnDuplicateKeyTest extends TestCase

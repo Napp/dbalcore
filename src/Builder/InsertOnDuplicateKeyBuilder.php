@@ -8,9 +8,9 @@ use Illuminate\Support\Arr;
 
 class InsertOnDuplicateKeyBuilder
 {
-    function __invoke ()
+    public function __invoke()
     {
-        /**
+        /*
          * Run an insert ignore statement against the database.
          *
          * @param  array $values
@@ -20,7 +20,7 @@ class InsertOnDuplicateKeyBuilder
             return $this->insertOnDuplicateKey($values, null, 'ignore');
         });
 
-        /**
+        /*
          * Run an insert on duplicate key update statement against the database.
          *
          * @param  array $values
@@ -40,7 +40,7 @@ class InsertOnDuplicateKeyBuilder
                 return true;
             }
 
-            if (! \is_array(reset($values))) {
+            if (!\is_array(reset($values))) {
                 $values = [$values];
             }
 
@@ -70,10 +70,10 @@ class InsertOnDuplicateKeyBuilder
             // to the query. Each insert should have the exact same amount of parameter
             // bindings so we will loop through the record and parameterize them all.
             $parameters = collect($values)->map(function ($record) {
-                return '(' . $this->grammar->parameterize($record) . ')';
+                return '('.$this->grammar->parameterize($record).')';
             })->implode(', ');
 
-            $sql = 'insert ' . ($type === 'ignore' ? 'ignore ' : '') . "into $table ($columnsString) values $parameters";
+            $sql = 'insert '.($type === 'ignore' ? 'ignore ' : '')."into $table ($columnsString) values $parameters";
 
             if ($type === 'ignore') {
                 return $this->connection->insert($sql, $bindings);
@@ -106,7 +106,7 @@ class InsertOnDuplicateKeyBuilder
             return $this->connection->insert(rtrim($sql, ','), $bindings);
         });
 
-        /**
+        /*
          * Attach models to the parent ignoring existing associations.
          *
          * @param  mixed $id
@@ -122,7 +122,7 @@ class InsertOnDuplicateKeyBuilder
             }
         });
 
-        /**
+        /*
          * Attach models to the parent updating existing associations.
          *
          * @param  mixed $id
