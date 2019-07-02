@@ -15,8 +15,9 @@ abstract class BaseRepository
     protected $query;
 
     /**
-     * @param int $id
+     * @param int   $id
      * @param array $relations
+     *
      * @return Model|Collection|null
      */
     public function find(int $id, array $relations = [])
@@ -25,9 +26,10 @@ abstract class BaseRepository
     }
 
     /**
-     * @param array  $ids
+     * @param array $ids
      * @param array $relations
-     * @param array  $columns
+     * @param array $columns
+     *
      * @return Collection
      */
     public function findMany(array $ids, array $relations = [], $columns = ['*'])
@@ -37,7 +39,8 @@ abstract class BaseRepository
 
     /**
      * @param string $attribute
-     * @param mixed $value
+     * @param mixed  $value
+     *
      * @return Model|null
      */
     public function findByAttribute(string $attribute, $value)
@@ -47,6 +50,7 @@ abstract class BaseRepository
 
     /**
      * @param array $attributes
+     *
      * @return Model|null
      */
     public function findByAttributes(array $attributes)
@@ -56,6 +60,7 @@ abstract class BaseRepository
 
     /**
      * @param CriteriaCollectionInterface $criteriaCollection
+     *
      * @return Model|null
      */
     public function findMatchingCriteria(CriteriaCollectionInterface $criteriaCollection)
@@ -67,6 +72,7 @@ abstract class BaseRepository
 
     /**
      * @param array $relations
+     *
      * @return Collection
      */
     public function getAll(array $relations = []): Collection
@@ -75,9 +81,10 @@ abstract class BaseRepository
     }
 
     /**
-     * @param string $attribute
+     * @param string       $attribute
      * @param array|string $value
-     * @param array $relations
+     * @param array        $relations
+     *
      * @return Collection
      */
     public function getAllByAttribute(string $attribute, $value, array $relations = []): Collection
@@ -94,6 +101,7 @@ abstract class BaseRepository
     /**
      * @param array $attributes
      * @param array $relations
+     *
      * @return Collection
      */
     public function getAllByAttributes(array $attributes, array $relations = []): Collection
@@ -103,12 +111,13 @@ abstract class BaseRepository
 
     /**
      * @param CriteriaCollectionInterface $criteriaCollection
+     *
      * @return \Illuminate\Database\Eloquent\Builder
      */
     protected function getCriteriaQuery(CriteriaCollectionInterface $criteriaCollection): Builder
     {
         $query = $this->query->newQuery();
-        $query->getQuery()->select($this->query->getTable() . '.*');
+        $query->getQuery()->select($this->query->getTable().'.*');
 
         foreach ($criteriaCollection->getAll() as $criterion) {
             $criterion->apply($query);
@@ -119,6 +128,7 @@ abstract class BaseRepository
 
     /**
      * @param CriteriaCollectionInterface $criteriaCollection
+     *
      * @return Collection
      */
     public function getAllMatchingCriteria(CriteriaCollectionInterface $criteriaCollection): Collection
@@ -130,13 +140,14 @@ abstract class BaseRepository
 
     /**
      * @param callable $callback
-     * @param int $attempts
-     * @return mixed
+     * @param int      $attempts
+     *
      * @throws \Throwable
+     *
+     * @return mixed
      */
     public function transaction(callable $callback, $attempts = 1)
     {
         return $this->query->newQuery()->getConnection()->transaction($callback, $attempts);
     }
-
 }

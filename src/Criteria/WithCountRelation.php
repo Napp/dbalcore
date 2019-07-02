@@ -13,6 +13,7 @@ class WithCountRelation implements CriterionInterface
 
     /**
      * @param \Illuminate\Database\Eloquent\Builder $query
+     *
      * @return \Illuminate\Database\Eloquent\Builder|void
      */
     public function apply($query)

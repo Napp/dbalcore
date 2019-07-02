@@ -33,11 +33,12 @@ class WithAttributeValueAndOperatorCriterion implements CriterionInterface
 
     /**
      * @param \Illuminate\Database\Eloquent\Builder $query
+     *
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function apply($query)
     {
-        $query->getQuery()->where($query->getModel()->getTable() . '.' . $this->attribute, $this->operator, $this->value);
+        $query->getQuery()->where($query->getModel()->getTable().'.'.$this->attribute, $this->operator, $this->value);
 
         return $query;
     }

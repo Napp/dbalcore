@@ -6,8 +6,7 @@ use Illuminate\Database\Grammar;
 use Illuminate\Database\Query\Builder;
 
 /**
- * Class ReplaceIntoBuilder
- * @package Napp\Core\Dbal\Builder
+ * Class ReplaceIntoBuilder.
  */
 class ReplaceIntoBuilder
 {
@@ -16,9 +15,9 @@ class ReplaceIntoBuilder
      */
     public function replace()
     {
-        return function (array $values)  {
+        return function (array $values) {
 
-            /** @var Builder $this  */
+            /* @var Builder $this  */
 
             if (empty($values)) {
                 return true;
@@ -27,7 +26,7 @@ class ReplaceIntoBuilder
             // Since every insert gets treated like a batch insert, we will make sure the
             // bindings are structured in a way that is convenient for building these
             // inserts statements by verifying the elements are actually an array.
-            if (! \is_array(reset($values))) {
+            if (!\is_array(reset($values))) {
                 $values = [$values];
             }
 
@@ -58,7 +57,6 @@ class ReplaceIntoBuilder
             // is the same type of result returned by the raw connection instance.
             $bindings = $this->cleanBindings($bindings);
 
-
             return $this->connection->insert($sql, $bindings);
         };
     }
@@ -66,20 +64,20 @@ class ReplaceIntoBuilder
     /**
      * @param Builder $query
      * @param Grammar $grammar
-     * @param array $values
+     * @param array   $values
+     *
      * @return string
      */
     public static function compileReplace()
     {
         return function (array $values) {
-
             $grammar = $this->getGrammar();
             // Essentially we will force every insert to be treated as a batch insert which
             // simply makes creating the SQL easier for us since we can utilize the same
             // basic routine regardless of an amount of records given to us to insert.
             $table = $grammar->wrapTable($this->from);
 
-            if (! \is_array(reset($values))) {
+            if (!\is_array(reset($values))) {
                 $values = [$values];
             }
 

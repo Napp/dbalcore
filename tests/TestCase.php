@@ -14,7 +14,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
     public static $migrated = false;
 
     /**
-     * Set up the test
+     * Set up the test.
      */
     public function setUp(): void
     {
@@ -52,7 +52,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
     /**
      * Define environment setup.
      *
-     * @param  \Illuminate\Foundation\Application   $app
+     * @param \Illuminate\Foundation\Application $app
      *
      * @return void
      */
@@ -61,24 +61,23 @@ class TestCase extends \Orchestra\Testbench\TestCase
         $app['config']->set('cache.default', 'array');
         $app['config']->set('database.default', 'test');
         $app['config']->set('database.connections.test', [
-            'driver' => 'mysql',
-            'host' => env('DB_HOST', '127.0.0.1'),
-            'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'dbalcore_testing'),
-            'username' => env('DB_USERNAME', 'username'),
-            'password' => env('DB_PASSWORD', 'password'),
+            'driver'      => 'mysql',
+            'host'        => env('DB_HOST', '127.0.0.1'),
+            'port'        => env('DB_PORT', '3306'),
+            'database'    => env('DB_DATABASE', 'dbalcore_testing'),
+            'username'    => env('DB_USERNAME', 'username'),
+            'password'    => env('DB_PASSWORD', 'password'),
             'unix_socket' => env('DB_SOCKET', ''),
-            'charset' => 'utf8mb4',
-            'collation' => 'utf8mb4_unicode_ci',
-            'prefix' => '',
-            'strict' => true,
-            'engine' => null,
+            'charset'     => 'utf8mb4',
+            'collation'   => 'utf8mb4_unicode_ci',
+            'prefix'      => '',
+            'strict'      => true,
+            'engine'      => null,
         ]);
-
     }
 
     /**
-     * Drop all tables to start the test with fresh data
+     * Drop all tables to start the test with fresh data.
      */
     public function dropAllTables()
     {
@@ -94,7 +93,8 @@ class TestCase extends \Orchestra\Testbench\TestCase
     }
 
     /**
-     * Migrate the database
+     * Migrate the database.
+     *
      * @param $paths
      */
     public function migrateTables()

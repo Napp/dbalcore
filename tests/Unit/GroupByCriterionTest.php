@@ -12,7 +12,7 @@ class GroupByCriterionTest extends TestCase
 
     public function test_it_implements_interface()
     {
-        $this->assertInstanceOf(CriterionInterface::class, new GroupByCriterion('published', 'id'   ));
+        $this->assertInstanceOf(CriterionInterface::class, new GroupByCriterion('published', 'id'));
     }
 
     public function test_it_applies_constraints_using_strings()
