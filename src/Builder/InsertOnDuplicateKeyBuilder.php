@@ -115,7 +115,8 @@ class InsertOnDuplicateKeyBuilder
          */
         BelongsToMany::macro('attachIgnore', function ($id, array $attributes = [], $touch = true) {
             $this->newPivotStatement()->insertIgnore($this->formatAttachRecords(
-                $this->parseIds($id), $attributes
+                $this->parseIds($id),
+                $attributes
             ));
             if ($touch) {
                 $this->touchIfTouching();
@@ -131,7 +132,8 @@ class InsertOnDuplicateKeyBuilder
          */
         BelongsToMany::macro('attachOnDuplicateKey', function ($id, array $attributes = [], $touch = true) {
             $this->newPivotStatement()->insertOnDuplicateKey($this->formatAttachRecords(
-                $this->parseIds($id), $attributes
+                $this->parseIds($id),
+                $attributes
             ));
 
             if ($touch) {
