@@ -2,11 +2,11 @@
 
 [![Build Status](https://travis-ci.org/Napp/dbalcore.svg?branch=master)](https://travis-ci.org/Napp/dbalcore)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Napp/dbalcore/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Napp/dbalcore/?branch=master)
-[![Code Coverage](https://scrutinizer-ci.com/g/Napp/dbalcore/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/Napp/dbalcore/?branch=master)
+[![codecov](https://codecov.io/gh/Napp/dbalcore/branch/master/graph/badge.svg?token=HiDNnCXY03)](https://codecov.io/gh/Napp/dbalcore/branch/master)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
 
 
-This packages extend the Laravel Query Builder, has a nice `Base Repository` and has a collection of helpful `Criteria` to build queries.
+This package extends the Laravel Query Builder, has a nice `Base Repository` and has a collection of helpful `Criteria` to build queries.
 
 
 
